@@ -17,11 +17,13 @@ public class ConveyorBelt : MonoBehaviour
 
     void Start()
     {
+       
         StartBelt();
     }
 
     public void StartBelt()
     {
+       
         _running = true;
         _spawnRoutine = StartCoroutine(SpawnLoop());
     }
@@ -35,6 +37,7 @@ public class ConveyorBelt : MonoBehaviour
 
     IEnumerator SpawnLoop()
     {
+       
         while (_running)
         {
             SpawnItem();
@@ -44,6 +47,7 @@ public class ConveyorBelt : MonoBehaviour
 
     void SpawnItem()
     {
+
         if (itemPool == null || itemPool.Count == 0) return;
 
         RecyclableItem data = itemPool[Random.Range(0, itemPool.Count)];

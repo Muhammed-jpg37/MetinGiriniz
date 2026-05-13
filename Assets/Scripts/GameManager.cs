@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,8 +23,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }
+
         Instance = this;
-        DontDestroyOnLoad(gameObject); 
+
+        DontDestroyOnLoad(gameObject);
     }
 
     

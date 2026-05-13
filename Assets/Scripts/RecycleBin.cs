@@ -25,22 +25,17 @@ public class RecycleBin : MonoBehaviour
 
     void OnCorrect(DraggableItem item)
     {
-        binRenderer.sprite = correctSprite;
-        successParticle?.Play();
+        if (successParticle != null)
+            successParticle.Play();
 
-        
         SortingSceneManager mgr = FindObjectOfType<SortingSceneManager>();
         if (mgr != null) mgr.OnItemSortedCorrectly(item.data);
 
         Destroy(item.gameObject);
-        Invoke(nameof(ResetSprite), 0.8f);
     }
 
     IEnumerator OnWrong(DraggableItem item)
     {
-        binRenderer.sprite = wrongSprite;
-
-        
         Vector3 originalPos = transform.position;
         for (int i = 0; i < 6; i++)
         {
@@ -48,11 +43,9 @@ public class RecycleBin : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         transform.position = originalPos;
-
-        
         item.GetComponent<ConveyorMover>().Resume();
-        ResetSprite();
+        Destroy(item.gameObject);
     }
 
-    void ResetSprite() => binRenderer.sprite = normalSprite;
+    void ResetSprite() { }
 }
