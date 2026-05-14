@@ -49,11 +49,13 @@ public class ConveyorBelt : MonoBehaviour
     {
 
         if (itemPool == null || itemPool.Count == 0) return;
+        if (itemPrefab == null) return;
+        if (spawnPoint == null) return;
 
         RecyclableItem data = itemPool[Random.Range(0, itemPool.Count)];
         GameObject go = Instantiate(itemPrefab, spawnPoint.position, Quaternion.identity);
 
-        go.GetComponent<DraggableItem>().Initialize(data);
+        go.GetComponent<DraggableItem>().Initialize(data, spawnPoint.position.y);
 
         ConveyorMover mover = go.GetComponent<ConveyorMover>();
         mover.speed = beltSpeed;

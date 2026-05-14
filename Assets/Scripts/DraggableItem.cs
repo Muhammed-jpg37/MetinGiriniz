@@ -11,13 +11,15 @@ public class DraggableItem : MonoBehaviour
     private ConveyorMover _mover;
     private bool _isDragging = false;
     private Vector3 _offset;
+    private float _beltY;
 
-    public void Initialize(RecyclableItem itemData)
+    public void Initialize(RecyclableItem itemData, float beltY)
     {
         data = itemData;
         _sr = GetComponent<SpriteRenderer>();
         _cam = Camera.main;
         _mover = GetComponent<ConveyorMover>();
+        _beltY = beltY;
 
         _sr.sprite = data.dirtySprite;
     }
@@ -48,7 +50,11 @@ public class DraggableItem : MonoBehaviour
         }
         else
         {
-            
+            transform.position = new Vector3(
+                transform.position.x,
+                _beltY,
+                transform.position.z
+            );
             _mover.Resume();
         }
     }
