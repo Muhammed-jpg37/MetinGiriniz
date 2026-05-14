@@ -30,6 +30,15 @@ public class DraggableItem : MonoBehaviour
         _mover.Pause();
         _offset = transform.position - GetMouseWorldPos();
         _sr.sortingOrder = 10;
+        
+    }
+    void OnMouseEnter()
+    {
+        gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1); 
+    }
+    void OnMouseExit()
+    {
+        gameObject.transform.localScale = new Vector3(1f, 1f, 1); 
     }
 
     void OnMouseDrag()

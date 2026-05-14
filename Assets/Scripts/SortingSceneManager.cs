@@ -5,9 +5,10 @@ using TMPro;
 public class SortingSceneManager : MonoBehaviour
 {
     [Header("UI")]
-    public Button nextPhaseButton;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI itemCountText;
+    [SerializeField] private Button nextPhaseButton;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI itemCountText;
+    [SerializeField] private Slider progressSlider;
 
     [Header("Ayar")]
     public int itemsNeededToProgress = 10;
@@ -18,6 +19,9 @@ public class SortingSceneManager : MonoBehaviour
     {
         nextPhaseButton.interactable = false;
         UpdateUI();
+        progressSlider.maxValue = itemsNeededToProgress;
+        progressSlider.value = 0;
+        nextPhaseButton.GetComponent<Image>().color = Color.clear; // Butonu gri yaparak devre dışı bırak
     }
 
     
@@ -37,10 +41,17 @@ public class SortingSceneManager : MonoBehaviour
     {
         FindObjectOfType<ConveyorBelt>()?.StopBelt();
         GameManager.Instance.GoToCleaning();
+        
     }
 
     void UpdateUI()
     {
         itemCountText.text = "Siralanan: " + _sortedCount + "/" + itemsNeededToProgress;
+        progressSlider.value++;
+        if(_sortedCount >= itemsNeededToProgress)
+        {
+            nextPhaseButton.GetComponent<Image>().color = Color.green; // Butonu yeşil yaparak aktif olduğunu göster
+            Destroy(progressSlider.gameObject); // İlerleme çubuğunu kaldır
+        }
     }
 }
