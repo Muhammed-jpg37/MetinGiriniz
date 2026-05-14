@@ -11,9 +11,11 @@ public class ConveyorBelt : MonoBehaviour
     public Transform despawnPoint;
     public float spawnInterval = 2.5f;
     public float beltSpeed = 1.5f;
+    
 
     private Coroutine _spawnRoutine;
     private bool _running = false;
+    
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class ConveyorBelt : MonoBehaviour
        
         _running = true;
         _spawnRoutine = StartCoroutine(SpawnLoop());
+        
     }
 
     public void StopBelt()
@@ -37,12 +40,17 @@ public class ConveyorBelt : MonoBehaviour
 
     IEnumerator SpawnLoop()
     {
-       
+
+        SpawnItem();
         while (_running)
         {
-            SpawnItem();
             yield return new WaitForSeconds(spawnInterval);
+            if (!_running ) break;
+
+            SpawnItem();
         }
+
+       
     }
 
     void SpawnItem()

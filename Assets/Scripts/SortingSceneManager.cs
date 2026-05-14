@@ -21,7 +21,7 @@ public class SortingSceneManager : MonoBehaviour
         UpdateUI();
         progressSlider.maxValue = itemsNeededToProgress;
         progressSlider.value = 0;
-        nextPhaseButton.GetComponent<Image>().color = Color.clear; // Butonu gri yaparak devre dışı bırak
+        nextPhaseButton.GetComponent<Image>().color = Color.clear;
     }
 
     
@@ -33,7 +33,11 @@ public class SortingSceneManager : MonoBehaviour
         UpdateUI();
 
         if (_sortedCount >= itemsNeededToProgress)
+        {
             nextPhaseButton.interactable = true;
+            FindObjectOfType<ConveyorBelt>()?.StopBelt();
+        }
+            
     }
 
     
@@ -50,8 +54,8 @@ public class SortingSceneManager : MonoBehaviour
         progressSlider.value++;
         if(_sortedCount >= itemsNeededToProgress)
         {
-            nextPhaseButton.GetComponent<Image>().color = Color.green; // Butonu yeşil yaparak aktif olduğunu göster
-            Destroy(progressSlider.gameObject); // İlerleme çubuğunu kaldır
+            nextPhaseButton.GetComponent<Image>().color = Color.green;
+            Destroy(progressSlider.gameObject);
         }
     }
 }
