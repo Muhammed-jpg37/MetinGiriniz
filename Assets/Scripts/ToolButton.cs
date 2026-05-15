@@ -11,10 +11,12 @@ public class ToolButton : MonoBehaviour
     public Color normalColor = Color.white;
     public Color selectedColor = new Color(0.6f, 1f, 0.6f);
 
+
     public void OnClicked()
     {
         CleaningSceneManager.Instance.OnToolSelected(toolCategory);
         SetSelected(true);
+
     }
 
     public void SetSelected(bool selected)
@@ -22,4 +24,5 @@ public class ToolButton : MonoBehaviour
         if (buttonImage != null)
             buttonImage.color = selected ? selectedColor : normalColor;
     }
+
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 using System.Collections.Generic;
 
 public class CleaningSceneManager : MonoBehaviour
@@ -24,13 +23,12 @@ public class CleaningSceneManager : MonoBehaviour
     [Header("UI")]
     public Button nextPhaseButton;
     public TextMeshProUGUI progressText;
+    public UnityEngine.UI.Slider cleaningSlider;
 
     private Queue<RecyclableItem> dirtyQueue = new Queue<RecyclableItem>();
     private CleaningItemObject currentDirtyItem;
     private CleaningItemObject workItem;
-    private List<GameObject> cleanedItems = new List<GameObject>();
-    private GameObject lastCleanedItem = null;
-
+    private GameObject lastCleanedItem;
 
     private RecycleCategory? selectedToolCategory = null;
     private int totalItems = 0;
@@ -55,15 +53,13 @@ public class CleaningSceneManager : MonoBehaviour
         ShowNextDirtyItem();
     }
 
-    
     void ShowNextDirtyItem()
     {
         if (dirtyQueue.Count == 0) return;
 
         RecyclableItem data = dirtyQueue.Dequeue();
 
-        
-        GameObject go = new GameObject("DirtyItem" + data.itemName);
+        GameObject go = new GameObject("DirtyItem_" + data.itemName);
         go.transform.position = dirtyItemSlot.position;
 
         SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
@@ -74,7 +70,7 @@ public class CleaningSceneManager : MonoBehaviour
         col.size = Vector2.one;
 
         CleaningItemObject itemObj = go.AddComponent<CleaningItemObject>();
-        itemObj.Initialize(data, CleaningItemObject.ItemState.Dirty);
+        itemObj.Initialize(data, CleaningItemObject.ItemState.Dirty, cleaningSlider);
 
         currentDirtyItem = itemObj;
     }
@@ -83,87 +79,45 @@ public class CleaningSceneManager : MonoBehaviour
     public void OnToolSelected(RecycleCategory toolCategory)
     {
         selectedToolCategory = toolCategory;
-
         
+        CleaningEffectSpawner.Instance?.SetCategory(toolCategory);
+
         foreach (ToolButton tb in toolButtons)
             tb.SetSelected(false);
-    }
-
-    
-    public void OnWorkItemClicked()
-    {
-        if (workItem == null) return;
-        if (selectedToolCategory == null)
-        {
-            Debug.Log("Once bir alet sec!");
-            return;
-        }
 
         
-        if (selectedToolCategory == workItem.data.category)
+        Color effectColor = toolCategory switch
         {
-            StartCoroutine(CleanItem());
-        }
-        else
-        {
-            StartCoroutine(WrongToolFeedback());
-        }
+            RecycleCategory.Plastik => new Color(0.4f, 0.6f, 1f),
+            RecycleCategory.Kagit => new Color(0.9f, 0.8f, 0.3f),
+            RecycleCategory.Cam => new Color(0.3f, 0.8f, 0.4f),
+            RecycleCategory.Metal => new Color(0.9f, 0.3f, 0.3f),
+            _ => Color.white
+        };
+
+        workItem?.SetEffectColor(effectColor);
     }
 
-    IEnumerator CleanItem()
+    public bool IsToolSelected() => selectedToolCategory != null;
+
+    public bool IsCorrectTool(RecycleCategory itemCategory)
     {
-        
-        workItem.SetClean();
+        if (selectedToolCategory == null) return false;
+        return selectedToolCategory == itemCategory;
+    }
 
-        yield return new WaitForSeconds(0.3f);
 
-      
+    public void OnItemCleaned()
+    {
         cleanBoxCollider.enabled = true;
-        workItem.SetState(CleaningItemObject.ItemState.Clean);
+        selectedToolCategory = null;
+
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        foreach (ToolButton tb in toolButtons)
+            tb.SetSelected(false);
 
         Debug.Log("Item temizlendi, temiz kutuya surukle!");
-    }
-
-   
-    public void OnItemDroppedToCleanBox(CleaningItemObject item)
-    {
-        cleanedCount++;
-        if (lastCleanedItem != null)
-        {
-            Destroy(lastCleanedItem);
-        }
-        lastCleanedItem = item.gameObject;
-        cleanedItems.Add(item.gameObject);
-
-      
-        CleanedItemData cleaned = new CleanedItemData
-        {
-            item = item.data,
-            quality = 100
-        };
-        GameManager.Instance.itemsToSell.Add(cleaned);
-
-        
-        item.transform.position = cleanItemSlot.position;
-        item.GetComponent<SpriteRenderer>().sortingOrder = cleanedCount;
-
-        workItem = null;
-        selectedToolCategory = null;
-        cleanBoxCollider.enabled = false;
-
-        UpdateProgressUI();
-
-        
-        if (dirtyQueue.Count > 0)
-        {
-            ShowNextDirtyItem();
-        }
-        else if (cleanedCount >= totalItems)
-        {
-           
-            nextPhaseButton.interactable = true;
-            Debug.Log("Tum itemler temizlendi!");
-        }
     }
 
    
@@ -174,18 +128,48 @@ public class CleaningSceneManager : MonoBehaviour
         currentDirtyItem = null;
     }
 
-    public void OnNextPhaseClicked()
+  
+    public void OnItemDroppedToCleanBox(CleaningItemObject item)
     {
-        GameManager.Instance.GoToSelling();
+        cleanedCount++;
+
+        
+        if (lastCleanedItem != null)
+            Destroy(lastCleanedItem);
+        lastCleanedItem = item.gameObject;
+
+        
+        CleanedItemData cleaned = new CleanedItemData
+        {
+            item = item.data,
+            quality = 100
+        };
+        GameManager.Instance.itemsToSell.Add(cleaned);
+
+        item.transform.position = cleanItemSlot.position;
+        item.GetComponent<SpriteRenderer>().sortingOrder = 5;
+
+        workItem = null;
+        selectedToolCategory = null;
+        cleanBoxCollider.enabled = false;
+
+        UpdateProgressUI();
+        if (cleanedCount >= totalItems)
+        {
+            nextPhaseButton.interactable = true;
+            Debug.Log("Tum itemler temizlendi!");
+        }
+        else
+        {
+            ShowNextDirtyItem();
+        }
     }
 
-    IEnumerator WrongToolFeedback()
+    
+    public void OnNextPhaseClicked()
     {
-        SpriteRenderer sr = workItem.GetComponent<SpriteRenderer>();
-        sr.color = new Color(1f, 0.3f, 0.3f);
-        yield return new WaitForSeconds(0.2f);
-        sr.color = Color.white;
-        Debug.Log("Yanlis alet!");
+        Debug.Log("OnNextPhaseClicked calisti");
+        GameManager.Instance.GoToSelling();
     }
 
     void UpdateProgressUI()
