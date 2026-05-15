@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6e54eb4c32239d340bff376fe41fef64
+guid: b7e68a7708772924b8209ca154c1d7b2
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -36,7 +36,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 20
+    spritePixelsToUnits: 32
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639143771503897615
+  platformSettingsDirtyTick: 639144661123351889
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -122,18 +122,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: recycle_shop 1
+  - name: tile falan filan
     originalName: 
-    pivot: {x: 1.3333334, y: -8.142858}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 48
-      height: 14
-    spriteID: c4701f15049d4684ba758b1dbc4b257d
+      width: 96
+      height: 256
+    spriteID: 9d7c1a5d4f3631b43a7e50324b6b87a3
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -143,7 +143,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
   spriteSheetImportData:
-  - name: paper_dirty
+  - name: tile falan filan_0
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -151,10 +151,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 143
-      width: 13
-      height: 14
-    spriteID: 9389782b0541f33498ee04c60e53c343
+      y: 228
+      width: 32
+      height: 32
+    spriteID: ccb2ac7f5a8e3ae438fa35360da53dcb
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -163,187 +163,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: paper_clean
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 18
-      y: 143
-      width: 13
-      height: 14
-    spriteID: 7660f2c3ff6f7a9459e71a9b96cc4161
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: paper_recycled
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 32
-      y: 145
-      width: 20
-      height: 12
-    spriteID: 39fef3274f0a62d478eb941c579d6473
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: trash_can
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 55
-      y: 127
-      width: 24
-      height: 28
-    spriteID: 6f5886f0550338c448a24472e5f554fb
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: glass_dirty
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 126
-      width: 7
-      height: 15
-    spriteID: 7b7cb48def52d154b9a70a18332c1dab
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: glass_clean
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 12
-      y: 126
-      width: 7
-      height: 15
-    spriteID: 092060a3ea50b064f8e699e9826407ac
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: glass_recycled
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 20
-      y: 126
-      width: 10
-      height: 12
-    spriteID: 05daa141965ebbb42840b21368bbcf32
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: molten_material
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 31
-      y: 126
-      width: 10
-      height: 12
-    spriteID: f39dbd11d03bd0d499b3efe1258aefd2
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: plastic_dirty
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 6
-      y: 102
-      width: 13
-      height: 21
-    spriteID: 511fee594e80e084c80ce16877f4e978
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: plastic_cleaned
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 21
-      y: 102
-      width: 13
-      height: 21
-    spriteID: a0384e25f37e4ca4395b054c2228f6ba
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: plastic_recycled
+  - name: tile falan filan_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -351,10 +171,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 36
-      y: 102
-      width: 16
-      height: 5
-    spriteID: 48e9308d3d1fe8f4baa0084b2fd4c0f8
+      y: 228
+      width: 32
+      height: 32
+    spriteID: fb2bf66fd884bba429303558c0a7c6b0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -363,18 +183,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: can_dirty
+  - name: tile falan filan_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 7
-      y: 84
-      width: 8
-      height: 13
-    spriteID: 4a4fd45d2c653d243963a6c24b3abf5b
+      x: 68
+      y: 228
+      width: 32
+      height: 32
+    spriteID: 9c81b409b6831b341a738741cf6accce
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -383,18 +203,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: can_clean
+  - name: tile falan filan_3
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 21
-      y: 84
-      width: 8
-      height: 13
-    spriteID: ff69afb3034c07f44ae76294785cb1e4
+      x: 4
+      y: 196
+      width: 32
+      height: 32
+    spriteID: 5a33bbe08d5e0824d86671f696e73132
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -403,18 +223,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: can_recycled
+  - name: tile falan filan_4
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 34
-      y: 84
-      width: 8
-      height: 9
-    spriteID: f8de65f1f031fd3449448ae7e0f3dfef
+      x: 36
+      y: 196
+      width: 32
+      height: 32
+    spriteID: ad83d799535bbb4458b4c4f7e7c7011d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -423,18 +243,298 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: table
+  - name: tile falan filan_5
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 6
+      x: 68
+      y: 196
+      width: 32
+      height: 32
+    spriteID: 948166be71247cc46a246a4bfb207898
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 164
+      width: 32
+      height: 32
+    spriteID: 07194492f55b9ab43bddc0caad83aca5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 164
+      width: 32
+      height: 32
+    spriteID: aa1257fd714aa2c49b3aef3b7beb2ca1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 164
+      width: 32
+      height: 32
+    spriteID: d07a476246cd63a4eaeb236efbdda2c0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 116
+      width: 32
+      height: 32
+    spriteID: 6bd398106b7d04f46bcf89d1a44d0404
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 116
+      width: 32
+      height: 32
+    spriteID: be801675f0388bd4089a72a822d7b0fd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_13
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 68
+      width: 32
+      height: 32
+    spriteID: da3b2ce021445754a9635be7582750e9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_14
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 68
+      width: 32
+      height: 32
+    spriteID: 67362260441f3ba4b91de8b930b3567f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_15
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 68
+      width: 32
+      height: 32
+    spriteID: a0d063914f1b9264795ff8f5593605e8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_16
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 36
+      width: 32
+      height: 32
+    spriteID: d61cfa63f28ab5b40bd3fd59195998ef
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_17
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 36
+      width: 32
+      height: 32
+    spriteID: 86dcec54d422739478f4c876620d2dde
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_18
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 36
+      width: 32
+      height: 32
+    spriteID: df809cf1bdc58bd42951f177c739aec1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_19
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
       y: 4
-      width: 96
-      height: 69
-    spriteID: f8cae2c1dfb2d224f91c99f0da20275c
+      width: 32
+      height: 32
+    spriteID: d9075604f5a3edd43807489934b09c4d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_20
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 4
+      width: 32
+      height: 32
+    spriteID: 95a29b59acc958a4e9f5f352c9966679
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: tile falan filan_21
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 4
+      width: 32
+      height: 32
+    spriteID: c9fe678bf5af00944b65e59eee6a8b66
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -445,21 +545,21 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
-    guid: -2095039363
-    name: recycle_shop 1
+    guid: 644965314
+    name: tile falan filan
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: recycle_shop 1
+    - name: tile falan filan
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
-        y: 15
-        width: 98
-        height: 153
-      spriteId: c4701f15049d4684ba758b1dbc4b257d
+        y: 0
+        width: 96
+        height: 256
+      spriteId: 9d7c1a5d4f3631b43a7e50324b6b87a3
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -502,5 +602,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 194, y: 168}
-  previousTextureSize: {x: 128, y: 256}
+  canvasSize: {x: 96, y: 256}
+  previousTextureSize: {x: 256, y: 512}
