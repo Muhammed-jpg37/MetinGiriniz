@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: WaterBottle
   category: 0
-  dirtySprite: {fileID: 4422935806533268294, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
-  cleanSprite: {fileID: -4583167787173763023, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
-  recycledSprite: {fileID: -270978607815893613, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
+  dirtySprite: {fileID: -6617411168580483953, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
+  cleanSprite: {fileID: 1558636078446919028, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
+  recycledSprite: {fileID: -8687367243777603344, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
   requiredTool: 0
   cleaningStepsRequired: 3
   baseValue: 50

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: DrinkCan
   category: 3
-  dirtySprite: {fileID: -5340126616831738946, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
-  cleanSprite: {fileID: 2933247036445160892, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
-  recycledSprite: {fileID: 1775334766547906381, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
+  dirtySprite: {fileID: 8596205281751035598, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
+  cleanSprite: {fileID: -7795271072596865284, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
+  recycledSprite: {fileID: 2649702336304111805, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
   requiredTool: 0
   cleaningStepsRequired: 3
   baseValue: 50
