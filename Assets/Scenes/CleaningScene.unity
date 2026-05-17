@@ -2400,6 +2400,10 @@ MonoBehaviour:
   nextPhaseButton: {fileID: 1497779303}
   progressText: {fileID: 1454443626}
   cleaningSlider: {fileID: 538576901}
+  cursorArrowPlastic: {fileID: 2800000, guid: e37324d56072ffc4c8369d1be4310658, type: 3}
+  cursorArrowMetal: {fileID: 2800000, guid: a2053ca99b4be864180ddd7f1f666e3d, type: 3}
+  cursorArrowGlass: {fileID: 2800000, guid: caea27a8da1131f48816f5c97bd2c0b0, type: 3}
+  cursorArrowPaper: {fileID: 2800000, guid: 5deabf6820146d04e8a4361ee0bf0610, type: 3}
 --- !u!1 &1567882452
 GameObject:
   m_ObjectHideFlags: 0

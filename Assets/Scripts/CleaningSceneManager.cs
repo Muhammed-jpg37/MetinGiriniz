@@ -7,17 +7,17 @@ public class CleaningSceneManager : MonoBehaviour
 {
     public static CleaningSceneManager Instance { get; private set; }
 
-    [Header("Sol Üst — Kirli Item Kutusu")]
+    [Header("Sol ï¿½st ï¿½ Kirli Item Kutusu")]
     public Transform dirtyItemSlot;
 
-    [Header("Orta — Çalýþma Alaný")]
+    [Header("Orta ï¿½ ï¿½alï¿½ï¿½ma Alanï¿½")]
     public Transform workAreaSlot;
 
-    [Header("Sol Alt — Temiz Item Kutusu")]
+    [Header("Sol Alt ï¿½ Temiz Item Kutusu")]
     public Transform cleanItemSlot;
     public Collider2D cleanBoxCollider;
 
-    [Header("Sað — Araç Paneli")]
+    [Header("Saï¿½ ï¿½ Araï¿½ Paneli")]
     public ToolButton[] toolButtons;
 
     [Header("UI")]
@@ -33,6 +33,20 @@ public class CleaningSceneManager : MonoBehaviour
     private RecycleCategory? selectedToolCategory = null;
     private int totalItems = 0;
     private int cleanedCount = 0;
+    [Header("Cursor")]
+    CursorArrow currentCursor = CursorArrow.DEFAULT;
+    public Texture2D cursorArrowPlastic;
+    public Texture2D cursorArrowMetal;
+    public Texture2D cursorArrowGlass;
+    public Texture2D cursorArrowPaper;
+     enum CursorArrow
+    {
+        Plastic,
+        Metal,
+        Glass,
+        Paper,
+        DEFAULT
+    }
 
     void Awake()
     {
@@ -79,6 +93,14 @@ public class CleaningSceneManager : MonoBehaviour
     public void OnToolSelected(RecycleCategory toolCategory)
     {
         selectedToolCategory = toolCategory;
+        ChangeCursor(toolCategory switch
+        {
+            RecycleCategory.Plastik => CursorArrow.Plastic,
+            RecycleCategory.Kagit => CursorArrow.Paper,
+            RecycleCategory.Cam => CursorArrow.Glass,
+            RecycleCategory.Metal => CursorArrow.Metal,
+            _ => CursorArrow.DEFAULT
+        });
         
         CleaningEffectSpawner.Instance?.SetCategory(toolCategory);
 
@@ -118,6 +140,7 @@ public class CleaningSceneManager : MonoBehaviour
             tb.SetSelected(false);
 
         Debug.Log("Item temizlendi, temiz kutuya surukle!");
+        ChangeCursor(CursorArrow.DEFAULT);
     }
 
    
@@ -175,5 +198,32 @@ public class CleaningSceneManager : MonoBehaviour
     void UpdateProgressUI()
     {
         progressText.text = "Temizlenen: " + cleanedCount + "/" + totalItems;
+    }
+     private void ChangeCursor(CursorArrow newCursor)
+    {
+
+        if (currentCursor != newCursor)
+        {
+            switch (newCursor)
+            {
+                case CursorArrow.Plastic:
+                    Cursor.SetCursor(cursorArrowPlastic, Vector2.zero, CursorMode.Auto);
+                    break;
+                case CursorArrow.Metal:
+                    Cursor.SetCursor(cursorArrowMetal, Vector2.zero, CursorMode.Auto);
+                    break;
+                case CursorArrow.Glass:
+                    Cursor.SetCursor(cursorArrowGlass, Vector2.zero, CursorMode.Auto);
+                    break;
+                case CursorArrow.Paper:
+                    Cursor.SetCursor(cursorArrowPaper, Vector2.zero, CursorMode.Auto);
+                    break;
+                case CursorArrow.DEFAULT:
+                    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                    break;
+            }
+
+            currentCursor = newCursor;
+        }
     }
 }
