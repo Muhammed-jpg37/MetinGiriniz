@@ -1,17 +1,15 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance { get; private set; }
 
-    [Header("Inventory UI")]
-    public Transform inventoryGrid;  
-    public GameObject inventorySlotPrefab; 
-    public int maxSlots = 20;
+    [Header("Referanslar")]
+    public Transform content;
 
-    
     private List<InventorySlotData> _slots = new List<InventorySlotData>();
 
     void Awake()
@@ -22,57 +20,79 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(RecyclableItem data, Sprite sprite)
     {
-        if (_slots.Count >= maxSlots) return;
+        CreateSlot(data, sprite, false, null, false);
+        Debug.Log("Hammadde eklendi: " + data.itemName);
+    }
 
-        
-        GameObject slotGo = Instantiate(inventorySlotPrefab, inventoryGrid);
-        Image slotImage = slotGo.GetComponentInChildren<Image>();
-        if (slotImage != null)
-            slotImage.sprite = sprite;
+    public void AddRecycledItem(RecyclableItem data, Sprite sprite)
+    {
+        CreateSlot(data, sprite, false, null, true);
+        Debug.Log("Recycled eklendi: " + data.itemName);
+    }
+
+    public void AddCraftedItem(CraftRecipe recipe)
+    {
+        CreateSlot(null, recipe.resultSprite, true, recipe, false);
+        Debug.Log("Crafted eklendi: " + recipe.resultName);
+    }
+
+    void CreateSlot(RecyclableItem data, Sprite sprite, bool isCrafted, CraftRecipe recipe, bool isRecycled)
+    {
+        string itemName = isCrafted ? recipe.resultName : (data != null ? data.itemName : "?");
+
+        GameObject row = new GameObject("Slot_" + itemName);
+        row.transform.SetParent(content, false);
+
+        Image bg = row.AddComponent<Image>();
+        bg.color = new Color(0.2f, 0.2f, 0.2f, 0.8f);
+
+        HorizontalLayoutGroup hlg = row.AddComponent<HorizontalLayoutGroup>();
+        hlg.spacing = 10;
+        hlg.padding = new RectOffset(8, 8, 8, 8);
+        hlg.childForceExpandWidth = false;
+        hlg.childForceExpandHeight = true;
+        hlg.childAlignment = TextAnchor.MiddleLeft;
+
+        LayoutElement le = row.AddComponent<LayoutElement>();
+        le.preferredHeight = 60;
+        le.flexibleWidth = 1;
+
+        // İkon
+        GameObject imgGo = new GameObject("Icon");
+        imgGo.transform.SetParent(row.transform, false);
+        Image img = imgGo.AddComponent<Image>();
+        img.sprite = sprite;
+        img.preserveAspect = true;
+        LayoutElement imgLe = imgGo.AddComponent<LayoutElement>();
+        imgLe.preferredWidth = 44;
+        imgLe.preferredHeight = 44;
+
+        // İsim
+        GameObject textGo = new GameObject("Name");
+        textGo.transform.SetParent(row.transform, false);
+        TextMeshProUGUI tmp = textGo.AddComponent<TextMeshProUGUI>();
+        tmp.text = itemName;
+        tmp.fontSize = 18;
+        tmp.color = Color.white;
+        tmp.alignment = TextAlignmentOptions.MidlineLeft;
+        LayoutElement textLe = textGo.AddComponent<LayoutElement>();
+        textLe.flexibleWidth = 1;
+
+        Button btn = row.AddComponent<Button>();
+        int index = _slots.Count;
+        btn.onClick.AddListener(() => OnSlotClicked(index));
 
         InventorySlotData slotData = new InventorySlotData
         {
             data = data,
             sprite = sprite,
-            slotGo = slotGo,
-            isSelected = false
-        };
-        _slots.Add(slotData);
-
-        Button btn = slotGo.GetComponent<Button>();
-        if (btn != null)
-        {
-            int index = _slots.Count - 1;
-            btn.onClick.AddListener(() => OnSlotClicked(index));
-        }
-
-        Debug.Log("Inventory'e eklendi: " + data.itemName);
-    }
-
-    public void AddCraftedItem(CraftRecipe recipe)
-    {
-        if (_slots.Count >= maxSlots) return;
-
-        GameObject slotGo = Instantiate(inventorySlotPrefab, inventoryGrid);
-        Image slotImage = slotGo.GetComponentInChildren<Image>();
-        if (slotImage != null)
-            slotImage.sprite = recipe.resultSprite;
-
-        InventorySlotData slotData = new InventorySlotData
-        {
-            data = recipe.result,
-            sprite = recipe.resultSprite,
-            slotGo = slotGo,
-            isCrafted = true,
+            slotGo = row,
+            isCrafted = isCrafted,
+            isRecycled = isRecycled,
             recipe = recipe,
             isSelected = false
         };
         _slots.Add(slotData);
-
-        int index = _slots.Count - 1;
-        Button btn = slotGo.GetComponent<Button>();
-        if (btn != null)
-            btn.onClick.AddListener(() => OnSlotClicked(index));
     }
 
     void OnSlotClicked(int index)
@@ -92,8 +112,10 @@ public class InventoryManager : MonoBehaviour
 
     public List<InventorySlotData> GetRecycledItems()
     {
-        return _slots.FindAll(s => !s.isCrafted);
+        return _slots.FindAll(s => s.isRecycled);
     }
+
+    public List<InventorySlotData> GetAllSlots() => _slots;
 }
 
 [System.Serializable]
@@ -104,5 +126,6 @@ public class InventorySlotData
     public GameObject slotGo;
     public bool isSelected;
     public bool isCrafted;
+    public bool isRecycled;
     public CraftRecipe recipe;
 }

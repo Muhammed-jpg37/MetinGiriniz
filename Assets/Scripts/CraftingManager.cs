@@ -9,9 +9,9 @@ public class CraftingManager : MonoBehaviour
     public static CraftingManager Instance { get; private set; }
 
     [Header("Craft Slotlarý")]
-    public Image slotA;        
-    public Image slotB;        
-    public Image slotResult;  
+    public Image slotA;
+    public Image slotB;
+    public Image slotResult;
 
     [Header("Craft UI")]
     public Button craftButton;
@@ -35,12 +35,10 @@ public class CraftingManager : MonoBehaviour
     void Start()
     {
         craftButton.interactable = false;
-        craftProgressSlider.value = 0f;
         craftProgressSlider.gameObject.SetActive(false);
-        ClearSlots();
+        ResetSlotVisuals();
     }
 
-   
     public void OnInventorySlotClicked(InventorySlotData slot)
     {
         if (_isCrafting) return;
@@ -72,38 +70,46 @@ public class CraftingManager : MonoBehaviour
 
     void UpdateCraftUI()
     {
+        
+        if (_selectedA != null)
+        {
+            slotA.sprite = _selectedA.sprite;
+            slotA.color = Color.white;
+        }
+        else
+        {
+            slotA.sprite = null;
+            slotA.color = new Color(1, 1, 1, 0.3f);
+        }
+
+        
+        if (_selectedB != null)
+        {
+            slotB.sprite = _selectedB.sprite;
+            slotB.color = Color.white;
+        }
+        else
+        {
+            slotB.sprite = null;
+            slotB.color = new Color(1, 1, 1, 0.3f);
+        }
+
        
-        slotA.sprite = _selectedA != null ? _selectedA.sprite : null;
-        slotB.sprite = _selectedB != null ? _selectedB.sprite : null;
-        slotA.color = _selectedA != null ? Color.white : new Color(1, 1, 1, 0.3f);
-        slotB.color = _selectedB != null ? Color.white : new Color(1, 1, 1, 0.3f);
+        slotResult.sprite = null;
+        slotResult.color = new Color(1, 1, 1, 0.3f);
 
         
         if (_selectedA != null && _selectedB != null)
         {
             CraftRecipe recipe = FindRecipe(_selectedA.data, _selectedB.data);
-            if (recipe != null)
-            {
-                slotResult.sprite = recipe.resultSprite;
-                slotResult.color = Color.white;
-                craftButton.interactable = true;
-            }
-            else
-            {
-                slotResult.sprite = null;
-                slotResult.color = new Color(1, 1, 1, 0.3f);
-                craftButton.interactable = false;
-            }
+            craftButton.interactable = recipe != null;
         }
         else
         {
-            slotResult.sprite = null;
-            slotResult.color = new Color(1, 1, 1, 0.3f);
             craftButton.interactable = false;
         }
     }
 
-    
     public void OnCraftClicked()
     {
         if (_selectedA == null || _selectedB == null || _isCrafting) return;
@@ -114,7 +120,6 @@ public class CraftingManager : MonoBehaviour
         StartCoroutine(CraftRoutine(recipe));
     }
 
-   
     public void OnRandomClicked()
     {
         if (_isCrafting) return;
@@ -127,6 +132,23 @@ public class CraftingManager : MonoBehaviour
         }
 
         
+        for (int i = 0; i < recycled.Count; i++)
+        {
+            for (int j = i + 1; j < recycled.Count; j++)
+            {
+                CraftRecipe recipe = FindRecipe(recycled[i].data, recycled[j].data);
+                if (recipe != null)
+                {
+                    Debug.Log("Tarif bulundu: " + recycled[i].data.itemName + " + " + recycled[j].data.itemName);
+                    _selectedA = recycled[i];
+                    _selectedB = recycled[j];
+                    UpdateCraftUI();
+                    return;
+                }
+            }
+        }
+
+        
         int indexA = Random.Range(0, recycled.Count);
         int indexB;
         do { indexB = Random.Range(0, recycled.Count); }
@@ -134,15 +156,9 @@ public class CraftingManager : MonoBehaviour
 
         _selectedA = recycled[indexA];
         _selectedB = recycled[indexB];
-
         UpdateCraftUI();
 
-        
-        CraftRecipe recipe = FindRecipe(_selectedA.data, _selectedB.data);
-        if (recipe != null)
-            StartCoroutine(CraftRoutine(recipe));
-        else
-            Debug.Log("Bu kombinasyon icin tarif yok!");
+        Debug.Log("Bu kombinasyon icin tarif yok!");
     }
 
     IEnumerator CraftRoutine(CraftRecipe recipe)
@@ -152,6 +168,7 @@ public class CraftingManager : MonoBehaviour
         craftProgressSlider.gameObject.SetActive(true);
         craftProgressSlider.value = 0f;
 
+        
         float elapsed = 0f;
         while (elapsed < craftDuration)
         {
@@ -161,7 +178,12 @@ public class CraftingManager : MonoBehaviour
         }
 
         craftProgressSlider.value = 1f;
-        yield return new WaitForSeconds(0.2f);
+
+        
+        slotResult.sprite = recipe.resultSprite;
+        slotResult.color = Color.white;
+
+        yield return new WaitForSeconds(0.8f);
 
         
         InventoryManager.Instance.RemoveSlot(_selectedA);
@@ -174,13 +196,18 @@ public class CraftingManager : MonoBehaviour
         _selectedA = null;
         _selectedB = null;
         _isCrafting = false;
+
         craftProgressSlider.gameObject.SetActive(false);
         craftProgressSlider.value = 0f;
-        UpdateCraftUI();
+
+        yield return new WaitForSeconds(0.3f);
+        ResetSlotVisuals();
     }
 
     CraftRecipe FindRecipe(RecyclableItem a, RecyclableItem b)
     {
+        if (a == null || b == null) return null;
+
         foreach (CraftRecipe recipe in recipes)
         {
             if ((recipe.ingredientA == a && recipe.ingredientB == b) ||
@@ -190,10 +217,11 @@ public class CraftingManager : MonoBehaviour
         return null;
     }
 
-    void ClearSlots()
+    void ResetSlotVisuals()
     {
         slotA.sprite = null;
         slotB.sprite = null;
+        slotResult.sprite = null;
         slotA.color = new Color(1, 1, 1, 0.3f);
         slotB.color = new Color(1, 1, 1, 0.3f);
         slotResult.color = new Color(1, 1, 1, 0.3f);

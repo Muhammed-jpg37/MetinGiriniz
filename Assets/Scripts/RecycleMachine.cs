@@ -6,14 +6,13 @@ public class RecycleMachine : MonoBehaviour
     public static RecycleMachine Instance { get; private set; }
 
     [Header("Pozisyonlar")]
-    public Transform inputSlot;    
-    public Transform outputSlot;  
-    public Transform insideSlot;   
+    public Transform inputSlot;   // sol kenar
+    public Transform outputSlot;  // sað kenar — buradan çýkar
+    public Transform finalSlot;   // durma noktasý
 
     [Header("Ayarlar")]
-    public float slideSpeed = 2f;  
-    public float processTime = 2f;  
-
+    public float slideSpeed = 3f;
+    public float processTime = 2f;
 
     private bool _isBusy = false;
 
@@ -36,20 +35,22 @@ public class RecycleMachine : MonoBehaviour
         _isBusy = true;
 
         SpriteRenderer sr = itemGo.GetComponent<SpriteRenderer>();
+        Collider2D col = itemGo.GetComponent<Collider2D>();
+
+        CleanedItemDraggable drag = itemGo.GetComponent<CleanedItemDraggable>();
+        if (drag != null) drag.enabled = false;
+        if (col != null) col.enabled = false;
 
         
-        yield return StartCoroutine(SlideTo(itemGo, inputSlot.position, slideSpeed));
+        yield return StartCoroutine(SlideTo(itemGo, inputSlot.position));
 
         
-        yield return StartCoroutine(SlideTo(itemGo, insideSlot.position, slideSpeed));
         itemGo.SetActive(false);
 
-        
-        
+       
         yield return new WaitForSeconds(processTime);
-        
 
-        
+       
         if (data.recycledSprite != null)
             sr.sprite = data.recycledSprite;
 
@@ -58,29 +59,47 @@ public class RecycleMachine : MonoBehaviour
         itemGo.SetActive(true);
 
         
-        Vector3 finalPos = outputSlot.position + Vector3.right * 1.5f;
-        yield return StartCoroutine(SlideTo(itemGo, finalPos, slideSpeed));
+        float elapsed = 0f;
+        float duration = Vector3.Distance(outputSlot.position, finalSlot.position) / slideSpeed;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            itemGo.transform.position = Vector3.Lerp(
+                outputSlot.position,
+                finalSlot.position,
+                elapsed / duration
+            );
+            yield return null;
+        }
+
+        itemGo.transform.position = finalSlot.position;
 
         
+        if (col != null) col.enabled = true;
+
         RecycledItemObject recycledObj = itemGo.GetComponent<RecycledItemObject>();
         if (recycledObj == null)
             recycledObj = itemGo.AddComponent<RecycledItemObject>();
         recycledObj.Initialize(data);
 
+        SellingSceneManager.Instance.SpawnNext();
         _isBusy = false;
     }
 
-    IEnumerator SlideTo(GameObject go, Vector3 target, float speed)
+    IEnumerator SlideTo(GameObject go, Vector3 target)
     {
-        while (Vector3.Distance(go.transform.position, target) > 0.01f)
+        while (go != null && Vector3.Distance(go.transform.position, target) > 0.02f)
         {
             go.transform.position = Vector3.MoveTowards(
                 go.transform.position,
                 target,
-                speed * Time.deltaTime
+                slideSpeed * Time.deltaTime
             );
             yield return null;
         }
-        go.transform.position = target;
+
+        if (go != null)
+            go.transform.position = target;
     }
 }
