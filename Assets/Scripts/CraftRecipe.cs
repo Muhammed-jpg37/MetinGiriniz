@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CraftRecipe : MonoBehaviour
+[CreateAssetMenu(fileName = "NewRecipe", menuName = "Recycle Shop/Craft Recipe")]
+public class CraftRecipe : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Malzemeler")]
+    public RecyclableItem ingredientA;
+    public RecyclableItem ingredientB;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Sonuç")]
+    public RecyclableItem result;
+    public Sprite resultSprite; 
+    public string resultName;
+    public int marketValue;
 }

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59283b1c496e7ca409fda4b7b37f8ab0, type: 3}
-  m_Name: WaterBottle
+  m_Name: Kagit
   m_EditorClassIdentifier: 
-  itemName: WaterBottle
-  category: 0
-  dirtySprite: {fileID: -6617411168580483953, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
-  cleanSprite: {fileID: 1558636078446919028, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
-  recycledSprite: {fileID: -8687367243777603344, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
+  itemName: OldNewspaper
+  category: 1
+  dirtySprite: {fileID: 8421534550527546352, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
+  cleanSprite: {fileID: -2766321570409307345, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
+  recycledSprite: {fileID: -1725210269570494705, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
   requiredTool: 0
   cleaningStepsRequired: 3
   baseValue: 50

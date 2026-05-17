@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d86ae01ac5128449b433aad1239aa87, type: 3}
+  m_Name: Karton Kutu
+  m_EditorClassIdentifier: 
+  ingredientA: {fileID: 11400000, guid: 06ea7e16ea27ca7479ee8de22ec73fc3, type: 2}
+  ingredientB: {fileID: 11400000, guid: 06ea7e16ea27ca7479ee8de22ec73fc3, type: 2}
+  result: {fileID: 0}
+  resultSprite: {fileID: 4797173348385571792, guid: 337f388ae3f0c634ca70e00583ef7482, type: 3}
+  resultName: Karton Kutu
+  marketValue: 0

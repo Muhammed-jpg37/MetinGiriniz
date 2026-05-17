@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WorkArea
   - CleanBox
+  - RecycleMachine
   layers:
   - Default
   - TransparentFX
