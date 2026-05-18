@@ -50,7 +50,7 @@ public class SortingSceneManager : MonoBehaviour
 
     void UpdateUI()
     {
-        itemCountText.text = "Siralanan: " + _sortedCount + "/" + itemsNeededToProgress;
+        itemCountText.text = "Item Count: " + _sortedCount + "/" + itemsNeededToProgress;
         progressSlider.value++;
         if(_sortedCount >= itemsNeededToProgress)
         {
