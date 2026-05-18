@@ -16,5 +16,7 @@ MonoBehaviour:
   ingredientB: {fileID: 11400000, guid: d6d1411d37821a54baed2768bc13f3b5, type: 2}
   result: {fileID: 0}
   resultSprite: {fileID: -68530634912786194, guid: 337f388ae3f0c634ca70e00583ef7482, type: 3}
-  resultName: Plaka
-  marketValue: 0
+  resultName: Metal Slab
+  marketValue: 20
+  minQuality: 50
+  maxQuality: 100

@@ -16,5 +16,7 @@ MonoBehaviour:
   ingredientB: {fileID: 11400000, guid: 06ea7e16ea27ca7479ee8de22ec73fc3, type: 2}
   result: {fileID: 0}
   resultSprite: {fileID: 8315319149639727201, guid: 337f388ae3f0c634ca70e00583ef7482, type: 3}
-  resultName: Not Defteri
-  marketValue: 0
+  resultName: Notebook
+  marketValue: 6
+  minQuality: 50
+  maxQuality: 100

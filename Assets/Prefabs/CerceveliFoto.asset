@@ -16,5 +16,7 @@ MonoBehaviour:
   ingredientB: {fileID: 11400000, guid: 06ea7e16ea27ca7479ee8de22ec73fc3, type: 2}
   result: {fileID: 0}
   resultSprite: {fileID: -8402109754678384316, guid: 337f388ae3f0c634ca70e00583ef7482, type: 3}
-  resultName: Cerceveli Fotograf
-  marketValue: 0
+  resultName: Framed Photo
+  marketValue: 7
+  minQuality: 50
+  maxQuality: 100

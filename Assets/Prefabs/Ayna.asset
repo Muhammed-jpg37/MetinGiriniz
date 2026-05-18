@@ -16,5 +16,7 @@ MonoBehaviour:
   ingredientB: {fileID: 11400000, guid: 537aedc82f512384e916077929a28baa, type: 2}
   result: {fileID: 0}
   resultSprite: {fileID: 8207563097396945760, guid: 337f388ae3f0c634ca70e00583ef7482, type: 3}
-  resultName: Ayna
-  marketValue: 0
+  resultName: Mirror
+  marketValue: 12
+  minQuality: 50
+  maxQuality: 100

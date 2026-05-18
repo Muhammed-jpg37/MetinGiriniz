@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59283b1c496e7ca409fda4b7b37f8ab0, type: 3}
   m_Name: Kagit
   m_EditorClassIdentifier: 
-  itemName: OldNewspaper
+  itemName: Newspaper
   category: 1
   dirtySprite: {fileID: 8421534550527546352, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}
   cleanSprite: {fileID: -2766321570409307345, guid: 6e54eb4c32239d340bff376fe41fef64, type: 3}

@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour
 
     [Header("Referanslar")]
     public Transform content;
+    public GameObject inventorySlotPrefab;
 
     private List<InventorySlotData> _slots = new List<InventorySlotData>();
 
@@ -20,65 +21,43 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(RecyclableItem data, Sprite sprite)
     {
-        CreateSlot(data, sprite, false, null, false);
-        Debug.Log("Hammadde eklendi: " + data.itemName);
+        CreateSlot(data, sprite, false, null, false, 0);
     }
 
     public void AddRecycledItem(RecyclableItem data, Sprite sprite)
     {
-        CreateSlot(data, sprite, false, null, true);
+        CreateSlot(data, sprite, false, null, true, 0);
         Debug.Log("Recycled eklendi: " + data.itemName);
     }
 
-    public void AddCraftedItem(CraftRecipe recipe)
+    public void AddCraftedItem(CraftRecipe recipe, int quality)
     {
-        CreateSlot(null, recipe.resultSprite, true, recipe, false);
-        Debug.Log("Crafted eklendi: " + recipe.resultName);
+        CreateSlot(null, recipe.resultSprite, true, recipe, false, quality);
+        Debug.Log("Crafted eklendi: " + recipe.resultName + " Quality: " + quality);
     }
 
-    void CreateSlot(RecyclableItem data, Sprite sprite, bool isCrafted, CraftRecipe recipe, bool isRecycled)
+    void CreateSlot(RecyclableItem data, Sprite sprite, bool isCrafted,
+                    CraftRecipe recipe, bool isRecycled, int quality)
     {
-        string itemName = isCrafted ? recipe.resultName : (data != null ? data.itemName : "?");
+        string itemName = isCrafted
+            ? recipe.resultName + " (%" + quality + ")"
+            : (data != null ? data.itemName : "?");
 
-        GameObject row = new GameObject("Slot_" + itemName);
-        row.transform.SetParent(content, false);
+        GameObject slot = Instantiate(inventorySlotPrefab, content);
 
-        Image bg = row.AddComponent<Image>();
-        bg.color = new Color(0.2f, 0.2f, 0.2f, 0.8f);
+        Image img = slot.transform.Find("ItemImage/Icon")?.GetComponent<Image>();
+        if (img != null)
+        {
+            img.sprite = sprite;
+            img.preserveAspect = true;
+        }
 
-        HorizontalLayoutGroup hlg = row.AddComponent<HorizontalLayoutGroup>();
-        hlg.spacing = 10;
-        hlg.padding = new RectOffset(8, 8, 8, 8);
-        hlg.childForceExpandWidth = false;
-        hlg.childForceExpandHeight = true;
-        hlg.childAlignment = TextAnchor.MiddleLeft;
+        TextMeshProUGUI txt = slot.transform.Find("ItemName")?.GetComponent<TextMeshProUGUI>();
+        if (txt != null)
+            txt.text = itemName;
 
-        LayoutElement le = row.AddComponent<LayoutElement>();
-        le.preferredHeight = 60;
-        le.flexibleWidth = 1;
-
-        // İkon
-        GameObject imgGo = new GameObject("Icon");
-        imgGo.transform.SetParent(row.transform, false);
-        Image img = imgGo.AddComponent<Image>();
-        img.sprite = sprite;
-        img.preserveAspect = true;
-        LayoutElement imgLe = imgGo.AddComponent<LayoutElement>();
-        imgLe.preferredWidth = 44;
-        imgLe.preferredHeight = 44;
-
-        // İsim
-        GameObject textGo = new GameObject("Name");
-        textGo.transform.SetParent(row.transform, false);
-        TextMeshProUGUI tmp = textGo.AddComponent<TextMeshProUGUI>();
-        tmp.text = itemName;
-        tmp.fontSize = 18;
-        tmp.color = Color.white;
-        tmp.alignment = TextAlignmentOptions.MidlineLeft;
-        LayoutElement textLe = textGo.AddComponent<LayoutElement>();
-        textLe.flexibleWidth = 1;
-
-        Button btn = row.AddComponent<Button>();
+        Button btn = slot.GetComponent<Button>();
+        if (btn == null) btn = slot.AddComponent<Button>();
         int index = _slots.Count;
         btn.onClick.AddListener(() => OnSlotClicked(index));
 
@@ -86,11 +65,12 @@ public class InventoryManager : MonoBehaviour
         {
             data = data,
             sprite = sprite,
-            slotGo = row,
+            slotGo = slot,
             isCrafted = isCrafted,
             isRecycled = isRecycled,
             recipe = recipe,
-            isSelected = false
+            isSelected = false,
+            quality = quality
         };
         _slots.Add(slotData);
     }
@@ -111,9 +91,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public List<InventorySlotData> GetRecycledItems()
-    {
-        return _slots.FindAll(s => s.isRecycled);
-    }
+        => _slots.FindAll(s => s.isRecycled);
 
     public List<InventorySlotData> GetAllSlots() => _slots;
 }
@@ -128,4 +106,5 @@ public class InventorySlotData
     public bool isCrafted;
     public bool isRecycled;
     public CraftRecipe recipe;
+    public int quality;
 }

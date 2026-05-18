@@ -22,8 +22,8 @@ public class RecycledItemObject : MonoBehaviour
     {
         if (!_isInitialized) return;
 
-        Debug.Log("Recycled item tiklandi: " + data.itemName);
-        InventoryManager.Instance.AddItem(data, GetComponent<SpriteRenderer>().sprite);
+        Debug.Log("Recycled tiklandi, data: " + (data == null ? "NULL" : data.itemName));
+        InventoryManager.Instance.AddRecycledItem(data, GetComponent<SpriteRenderer>().sprite);
         Destroy(gameObject);
     }
 }

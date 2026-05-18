@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using System.Collections;
 
 public class RecycleMachine : MonoBehaviour
@@ -6,13 +8,17 @@ public class RecycleMachine : MonoBehaviour
     public static RecycleMachine Instance { get; private set; }
 
     [Header("Pozisyonlar")]
-    public Transform inputSlot;   // sol kenar
-    public Transform outputSlot;  // sað kenar — buradan çýkar
-    public Transform finalSlot;   // durma noktasý
+    public Transform inputSlot;
+    public Transform outputSlot;
+    public Transform finalSlot;
 
     [Header("Ayarlar")]
     public float slideSpeed = 3f;
     public float processTime = 2f;
+
+    [Header("UI")]
+    public Slider processSlider;    
+    public TextMeshProUGUI countdownText;
 
     private bool _isBusy = false;
 
@@ -20,6 +26,17 @@ public class RecycleMachine : MonoBehaviour
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
+    }
+
+    void Start()
+    {
+        if (processSlider != null)
+        {
+            processSlider.value = 0f;
+            processSlider.gameObject.SetActive(false);
+        }
+        if (countdownText != null)
+            countdownText.gameObject.SetActive(false);
     }
 
     public bool IsBusy() => _isBusy;
@@ -47,32 +64,65 @@ public class RecycleMachine : MonoBehaviour
         
         itemGo.SetActive(false);
 
-       
-        yield return new WaitForSeconds(processTime);
+        
+        if (processSlider != null)
+        {
+            processSlider.value = 0f;
+            processSlider.gameObject.SetActive(true);
+        }
+        if (countdownText != null)
+            countdownText.gameObject.SetActive(true);
 
-       
+        
+        float elapsed = 0f;
+        while (elapsed < processTime)
+        {
+            elapsed += Time.deltaTime;
+
+            if (processSlider != null)
+                processSlider.value = elapsed / processTime;
+
+            if (countdownText != null)
+            {
+                float remaining = processTime - elapsed;
+                countdownText.text = remaining.ToString("F1") + "s";
+            }
+
+            yield return null;
+        }
+
+        
+        if (processSlider != null)
+        {
+            processSlider.value = 1f;
+            processSlider.gameObject.SetActive(false);
+        }
+        if (countdownText != null)
+            countdownText.gameObject.SetActive(false);
+
+        
         if (data.recycledSprite != null)
             sr.sprite = data.recycledSprite;
+        else
+            sr.color = new Color(0.3f, 1f, 0.3f);
 
-       
+        
         itemGo.transform.position = outputSlot.position;
         itemGo.SetActive(true);
 
         
-        float elapsed = 0f;
         float duration = Vector3.Distance(outputSlot.position, finalSlot.position) / slideSpeed;
-
-        while (elapsed < duration)
+        float t = 0f;
+        while (t < duration)
         {
-            elapsed += Time.deltaTime;
+            t += Time.deltaTime;
             itemGo.transform.position = Vector3.Lerp(
                 outputSlot.position,
                 finalSlot.position,
-                elapsed / duration
+                t / duration
             );
             yield return null;
         }
-
         itemGo.transform.position = finalSlot.position;
 
         
@@ -84,6 +134,7 @@ public class RecycleMachine : MonoBehaviour
         recycledObj.Initialize(data);
 
         SellingSceneManager.Instance.SpawnNext();
+
         _isBusy = false;
     }
 
@@ -98,7 +149,6 @@ public class RecycleMachine : MonoBehaviour
             );
             yield return null;
         }
-
         if (go != null)
             go.transform.position = target;
     }

@@ -12,4 +12,8 @@ public class CraftRecipe : ScriptableObject
     public Sprite resultSprite; 
     public string resultName;
     public int marketValue;
+
+    [Header("Quality")]
+    public int minQuality = 50;
+    public int maxQuality = 100;
 }

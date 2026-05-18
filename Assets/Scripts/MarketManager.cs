@@ -10,9 +10,8 @@ public class MarketManager : MonoBehaviour
     [Header("Market Panel")]
     public GameObject marketPanel;
     public Transform marketItemGrid;
-    public GameObject marketItemPrefab; 
+    public GameObject marketItemPrefab;
     public TextMeshProUGUI totalMoneyText;
-    public Button closeButton;
 
     void Awake()
     {
@@ -21,7 +20,6 @@ public class MarketManager : MonoBehaviour
         marketPanel.SetActive(false);
     }
 
-   
     public void OpenMarket()
     {
         if (GameManager.Instance == null)
@@ -44,16 +42,10 @@ public class MarketManager : MonoBehaviour
         foreach (Transform child in marketItemGrid)
             Destroy(child.gameObject);
 
-        List<InventorySlotData> crafted = InventoryManager.Instance.GetAllSlots()
-            .FindAll(s => s.isCrafted);
+        List<InventorySlotData> crafted = InventoryManager.Instance
+            .GetAllSlots().FindAll(s => s.isCrafted);
 
-        Debug.Log("Market'te satilacak item sayisi: " + crafted.Count);
-
-        if (crafted.Count == 0)
-        {
-            Debug.Log("Hic crafted item yok!");
-            return;
-        }
+        Debug.Log("Market'te satilacak: " + crafted.Count);
 
         foreach (InventorySlotData slot in crafted)
         {
@@ -61,13 +53,20 @@ public class MarketManager : MonoBehaviour
 
             Image[] images = row.GetComponentsInChildren<Image>();
             if (images.Length >= 2)
+            {
                 images[1].sprite = slot.sprite;
-            else if (images.Length == 1)
-                images[0].sprite = slot.sprite;
+                images[1].preserveAspect = true;
+            }
+
+            
+            float multiplier = slot.quality / 100f;
+            int price = Mathf.RoundToInt(slot.recipe.marketValue * multiplier);
 
             TextMeshProUGUI[] texts = row.GetComponentsInChildren<TextMeshProUGUI>();
-            if (texts.Length > 0) texts[0].text = slot.recipe != null ? slot.recipe.resultName : "?";
-            if (texts.Length > 1) texts[1].text = slot.recipe != null ? slot.recipe.marketValue + " TL" : "0 TL";
+            if (texts.Length > 0)
+                texts[0].text = slot.recipe.resultName;
+            if (texts.Length > 1)
+                texts[1].text = price + " TL (%" + slot.quality + ")";
 
             Button sellBtn = row.GetComponentInChildren<Button>();
             if (sellBtn != null)
@@ -84,20 +83,22 @@ public class MarketManager : MonoBehaviour
     {
         if (slot == null || slot.recipe == null) return;
 
-        int value = slot.recipe.marketValue;
+        float multiplier = slot.quality / 100f;
+        int price = Mathf.RoundToInt(slot.recipe.marketValue * multiplier);
 
         if (GameManager.Instance != null)
-            GameManager.Instance.AddMoney(value);
+            GameManager.Instance.AddMoney(price);
+
+        Debug.Log(slot.recipe.resultName + " satildi: " + price + " TL");
 
         InventoryManager.Instance.RemoveSlot(slot);
         RefreshMarket();
         UpdateMoneyUI();
-
-        Debug.Log(slot.recipe.resultName + " satildi: " + value + " TL");
     }
 
     void UpdateMoneyUI()
     {
-        totalMoneyText.text = "Para: " + GameManager.Instance.totalMoney + " TL";
+        if (totalMoneyText != null && GameManager.Instance != null)
+            totalMoneyText.text = "Para: " + GameManager.Instance.totalMoney + " TL";
     }
 }

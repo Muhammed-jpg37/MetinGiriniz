@@ -16,5 +16,7 @@ MonoBehaviour:
   ingredientB: {fileID: 11400000, guid: 03b888c9cc4b2bb46a36fede70e4652f, type: 2}
   result: {fileID: 0}
   resultSprite: {fileID: 5349724007973680979, guid: 337f388ae3f0c634ca70e00583ef7482, type: 3}
-  resultName: Tornavida
-  marketValue: 0
+  resultName: Screwdriver
+  marketValue: 3
+  minQuality: 50
+  maxQuality: 100
