@@ -66,7 +66,7 @@ public class MarketManager : MonoBehaviour
             if (texts.Length > 0)
                 texts[0].text = slot.recipe.resultName;
             if (texts.Length > 1)
-                texts[1].text = price + " TL (%" + slot.quality + ")";
+                texts[1].text = price + " TL";
 
             Button sellBtn = row.GetComponentInChildren<Button>();
             if (sellBtn != null)

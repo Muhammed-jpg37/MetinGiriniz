@@ -211,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -447,10 +447,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1843116118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.04866667, y: 0.032857146}
-  m_AnchorMax: {x: 0.966, y: 0.88000005}
-  m_AnchoredPosition: {x: -2.0228271, y: -2.515686}
-  m_SizeDelta: {x: 0.71899414, y: -2.9685059}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 8.977173, y: -33.015686}
+  m_SizeDelta: {x: 1374.719, y: 590.0315}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &174272963
 MonoBehaviour:
@@ -472,10 +472,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 400, y: 60}
+  m_CellSize: {x: 1100, y: 108}
   m_Spacing: {x: 0, y: 5}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 1
 --- !u!1 &179627399
 GameObject:
   m_ObjectHideFlags: 0
@@ -4575,7 +4575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1843116118
 RectTransform:
   m_ObjectHideFlags: 0

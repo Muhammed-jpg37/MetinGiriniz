@@ -37,7 +37,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     void CreateSlot(RecyclableItem data, Sprite sprite, bool isCrafted,
-                    CraftRecipe recipe, bool isRecycled, int quality)
+                 CraftRecipe recipe, bool isRecycled, int quality)
     {
         string itemName = isCrafted
             ? recipe.resultName + " (%" + quality + ")"
@@ -56,11 +56,6 @@ public class InventoryManager : MonoBehaviour
         if (txt != null)
             txt.text = itemName;
 
-        Button btn = slot.GetComponent<Button>();
-        if (btn == null) btn = slot.AddComponent<Button>();
-        int index = _slots.Count;
-        btn.onClick.AddListener(() => OnSlotClicked(index));
-
         InventorySlotData slotData = new InventorySlotData
         {
             data = data,
@@ -73,12 +68,17 @@ public class InventoryManager : MonoBehaviour
             quality = quality
         };
         _slots.Add(slotData);
+
+        
+        Button btn = slot.GetComponent<Button>();
+        if (btn == null) btn = slot.AddComponent<Button>();
+        btn.onClick.AddListener(() => OnSlotClicked(slotData));
     }
 
-    void OnSlotClicked(int index)
+    void OnSlotClicked(InventorySlotData slotData)
     {
-        if (index >= _slots.Count) return;
-        CraftingManager.Instance.OnInventorySlotClicked(_slots[index]);
+        if (slotData == null) return;
+        CraftingManager.Instance.OnInventorySlotClicked(slotData);
     }
 
     public void RemoveSlot(InventorySlotData slot)
