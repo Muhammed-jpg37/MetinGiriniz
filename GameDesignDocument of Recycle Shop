@@ -1,0 +1,23 @@
+Game Introduction
+Recycle Shop is a 2D factory simulation game that places the player at the heart of a recycling facility. Raw waste materials arrive on a conveyor belt, and it is the player's job to sort them into the correct recycling bins, scrub them clean with the right tools, process them through a recycling machine, and finally craft entirely new products from the recovered materials. Set in a cheerful industrial world of clanking belts and bubbling cleaning solutions, the game challenges players to think quickly, work methodically, and make smart crafting decisions — all while racing to maximise their earnings at the market.
+
+What I Did
+
+İlhan Türk: I did the main programming part of the game. I wrote most of the code and applied it into the game.
+
+Özgür Güneş Akkuş:Expand the game idea and concept.Did the sprites and UI design.
+
+Hüseyin Cem Kapçık:Found the game idea.Made 2D Art and UI.
+
+Muhammed Kaya:Helped İlhan at programming and Editor part of the game,establishled GitHub and helped my teammates o use it.Finally I did Quality Assurance.
+
+Educational Concept
+
+Pedagogical Goal
+Recycle Shop is designed to teach players the foundational principles of material recycling and waste sorting in a hands-on, engaging environment. Specifically, the game aims to build awareness of which materials belong to which recycling category (plastic, glass, paper, metal), why cleaning and processing matter before materials can be reused, and how combining recovered materials generates new value — mirroring real-world circular economy principles.
+
+Applied Learning Theory
+The game primarily draws on Constructivism, as proposed by Piaget and later expanded by Papert's theory of Constructionism. Rather than presenting recycling facts through text or instruction, the game asks players to actively construct their own understanding by doing. Each phase — sorting, cleaning, processing, and crafting — is a hands-on problem-solving cycle where the player builds mental models through direct interaction and immediate feedback. When a player drops glass into the plastic bin and receives a shake animation and red flash, they do not simply read that the action was wrong; they experience the consequence and self-correct. This trial-and-error loop is the core engine of constructivist learning.
+
+How Game Mechanics Facilitate Learning
+The sorting phase directly encodes the real-world skill of material categorisation. By dragging items to bins labelled by material type, players repeatedly practise the association between an object's appearance and its correct waste stream — the same cognitive act required at a real recycling point. The cleaning phase introduces the concept that recycled materials require preparation before reuse; the slow sprite transition from dirty to clean, driven by the player's own scrubbing motion, creates a tangible sense of effort and transformation that passive media cannot replicate. The crafting system models the circular economy: discarded waste has latent value, and combining materials thoughtfully produces something worth more than its parts. The randomised quality outcome introduces variability and critical thinking — players learn that process quality affects output value, encouraging more careful and deliberate play over time. Finally, the market mechanic closes the feedback loop by translating all prior decisions into a concrete monetary reward, reinforcing the idea that sustainable practices generate real economic benefit.
