@@ -140,12 +140,22 @@ public class RecycleMachine : MonoBehaviour
 
     IEnumerator SlideTo(GameObject go, Vector3 target)
     {
+        if(go.transform.position.y != target.y)
+        {
+            go.transform.position = new Vector3(
+                go.transform.position.x,
+                target.y,
+                go.transform.position.z
+            );
+        }
         while (go != null && Vector3.Distance(go.transform.position, target) > 0.02f)
         {
+            
             go.transform.position = Vector3.MoveTowards(
                 go.transform.position,
                 target,
                 slideSpeed * Time.deltaTime
+                
             );
             yield return null;
         }

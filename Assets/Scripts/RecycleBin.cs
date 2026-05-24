@@ -6,7 +6,7 @@ public class RecycleBin : MonoBehaviour
     [Header("Kategori")]
     public RecycleCategory acceptedCategory;
 
-    [Header("Görsel")]
+    [Header("Gï¿½rsel")]
     public SpriteRenderer binRenderer;
     public Sprite normalSprite;
     public Sprite correctSprite;
